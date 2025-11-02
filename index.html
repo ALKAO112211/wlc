@@ -1,192 +1,1053 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background: transparent;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Notification</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <title>Macho Menu</title>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: transparent;
+        * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            filter: none !important;
+        }
+        
+        html, body {
             margin: 0;
             padding: 0;
-            color: #f8f8f8;
+            width: 100%;
+            height: 100%;
+            background: none;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
             display: flex;
-            align-items: center;
             justify-content: flex-end;
-            height: 100vh;
-            overflow: hidden;
+            align-items: flex-start;
+        }
+        
+        .menu {
+            background: linear-gradient(145deg, rgba(15, 0, 0, 0.98), rgba(30, 5, 5, 0.98), rgba(20, 0, 0, 0.98));
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 16px;
+            min-width: 300px;
+            max-width: 500px;
+            width: 450px;
+            margin: 10px;
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 
+                        0 0 80px rgba(139, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
             position: relative;
-        }
-
-        .notification-box {
-            width: 280px;
-            background: rgba(22, 22, 22, 0.95);
-            border-radius: 14px;
-            padding: 16px;
-            border: 1px solid rgba(250, 204, 21, 0.3);
-            margin-right: 2%;
             overflow: hidden;
-            animation: slideIn 0.4s ease-out;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-
-        .notification-box.fade-out {
-            animation: fadeOut 0.5s ease-in forwards;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translateX(50px); }
-        }
-
-        /* Wave Effect */
-        .wave-effect {
+        
+        .menu::before {
+            content: '';
             position: absolute;
             top: 0;
-            left: -75%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                120deg,
-                rgba(255, 255, 255, 0.0) 0%,
-                rgba(255, 255, 255, 0.12) 40%,
-                rgba(255, 255, 255, 0.2) 50%,
-                rgba(255, 255, 255, 0.12) 60%,
-                rgba(255, 255, 255, 0.0) 100%
-            );
-            transform: skewX(-25deg);
-            animation: waveAnimation 2.5s infinite;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.6;
+            z-index: 0;
         }
-
-        @keyframes waveAnimation {
-            0% { left: -75%; }
-            100% { left: 130%; }
-        }
-
-        .user-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
+        
+        .menu > * {
             position: relative;
+            z-index: 1;
+        }
+        
+        .header { 
+            background: linear-gradient(135deg, #8B0000 0%, #ff0000 50%, #8B0000 100%);
+            padding: 180px 12px 14px 20px;
+            border-radius: 14px 14px 0 0; 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: white; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            position: relative; 
+            text-align: left;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.6), 
+                         2px 2px 8px rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.4);
+        }
+        
+        .header-subtitle {
+            font-size: 13px;
+            color: #999999;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            font-weight: normal;
+        } 
+        
+        .header::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 30px;
+            background-image: url('https://i.postimg.cc/YCBK2fps/image.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center top;
+            border-radius: 6px 6px 0 0; 
+            z-index: 0; 
+        } 
+        
+        .header > * { 
+            position: relative; 
+            z-index: 1; 
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.2s;
             z-index: 2;
         }
-
-        .avatar-wrapper {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            border: 2px solid #facc15;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-            animation: glowPulse 2s infinite ease-in-out;
-            overflow: hidden;
-            flex-shrink: 0;
+        
+        .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
-
-        .avatar { width: 100%; height: 100%; object-fit: cover; }
-
-        .user-info { flex: 1; }
-
-        .display-name {
-            color: #fef08a;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            text-shadow: 0 0 4px rgba(254, 226, 80, 0.4);
-            margin: 0;
+        
+        .main-content {
+            display: flex;
+            min-height: 400px;
+            max-height: 500px;
         }
-
-        .username {
-            color: #64748b;
+        
+        .sidebar {
+            width: 160px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(10, 0, 0, 0.5) 100%);
+            border-right: 1px solid rgba(139, 0, 0, 0.4);
+            padding: 8px 0;
+            overflow-y: auto;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+        
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                rgba(255, 0, 0, 0.3) 50%, 
+                transparent 100%);
+        }
+        
+        .sidebar.dimmed {
+            opacity: 0.3;
+        }
+        
+        .tab {
+            background: transparent;
+            border: none;
+            color: #999999;
+            padding: 14px 16px;
+            width: 100%;
+            cursor: pointer;
             font-size: 13px;
             font-weight: 500;
-            margin: 2px 0 0 0;
-            opacity: 0.85;
-        }
-
-        .glow-line {
-            height: 1px;
-            background: linear-gradient(90deg, 
-                        rgba(250, 204, 21, 0) 0%, 
-                        rgba(250, 204, 21, 0.3) 40%, 
-                        rgba(255, 255, 255, 0.7) 50%, 
-                        rgba(250, 204, 21, 0.3) 60%, 
-                        rgba(250, 204, 21, 0) 100%);
-            box-shadow: 0 0 10px 1px rgba(255, 215, 0, 0.4);
-            margin: 10px 0;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
             position: relative;
-            z-index: 2;
+            overflow: hidden;
         }
-
-        .welcome-text {
-            font-size: 14px;
-            color: #e2e8f0;
-            text-align: center;
+        
+        .tab::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, rgba(139, 0, 0, 0.4), transparent);
+            transition: width 0.3s ease;
+        }
+        
+        .tab:hover::before {
+            width: 100%;
+        }
+        
+        .tab:hover {
+            color: #ffffff;
+            padding-left: 20px;
+        }
+        
+        .tab.active {
+            background: linear-gradient(90deg, rgba(255, 0, 0, 0.25), rgba(139, 0, 0, 0.15));
+            color: #ff3333;
+            border-left: 3px solid #ff0000;
+            font-weight: 700;
+            box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.1);
+        }
+        
+        .tab.active::after {
+            content: '▶';
+            position: absolute;
+            right: 12px;
+            color: #ff0000;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        .tab.navigating::after {
+            content: '●';
+            position: absolute;
+            right: 12px;
+            color: #00ff00;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: linear-gradient(180deg, rgba(5, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ff0000;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(139, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+            position: relative;
+        }
+        
+        .content-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff0000, transparent);
+        }
+        
+        .option-item {
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.4), rgba(10, 0, 0, 0.6));
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid rgba(139, 0, 0, 0.6);
+            color: #e0e0e0;
+            font-size: 13px;
             font-weight: 500;
-            margin: 8px 0 0 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
             position: relative;
-            z-index: 2;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); }
-            50% { box-shadow: 0 0 24px rgba(255, 215, 0, 1); }
-            100% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.6); }
+        
+        .option-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .option-item:hover::before {
+            left: 100%;
+        }
+        
+        .option-item:hover {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.4), rgba(80, 0, 0, 0.5));
+            border-left-color: #ff0000;
+            transform: translateX(6px) scale(1.02);
+            box-shadow: 0 4px 16px rgba(255, 0, 0, 0.3), 
+                        inset 0 0 20px rgba(255, 0, 0, 0.1);
+            color: #ffffff;
+        }
+        
+        .option-item.selected {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.35), rgba(139, 0, 0, 0.4));
+            border-left-color: #ff0000;
+            font-weight: 700;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4),
+                        inset 0 0 30px rgba(255, 0, 0, 0.15);
+            transform: translateX(4px);
+        }
+        
+        .back-option {
+            color: #00ff00 !important;
+            border-left-color: #00ff00 !important;
+        }
+        
+        .back-option:hover {
+            background-color: rgba(0, 255, 0, 0.2);
+            border-left-color: #00ff00;
+        }
+        
+        .footer {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+            padding: 12px 20px;
+            border-radius: 0 0 14px 14px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(139, 0, 0, 0.4);
+            color: #999999;
+            font-weight: 500;
+        }
+        
+        .counter {
+            color: #ff6666;
+            font-weight: bold;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #8B0000;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.95), rgba(40, 0, 0, 0.95));
+            border: 2px solid #8B0000;
+            border-radius: 8px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            min-width: 250px;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease-out, slideOut 0.3s ease-in 2.7s;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+        .notification-title {
+            color: #ff0000;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .notification-message {
+            color: #ffffff;
+            font-size: 13px;
+        }
+        
+        .search-input {
+            width: calc(100% - 20px);
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px solid #8B0000;
+            border-radius: 4px;
+            padding: 10px;
+            color: white;
+            font-size: 13px;
+            margin-bottom: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: #ff0000;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .search-input::placeholder {
+            color: #666666;
+        }
+        
+        #searchResults {
+            margin-top: 8px;
+        }
+        
+        .search-category {
+            color: #ff6666;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        
+        .description-panel {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.98), rgba(40, 0, 0, 0.98));
+            border: 2px solid #8B0000;
+            border-radius: 8px;
+            padding: 12px 16px;
+            max-width: 300px;
+            min-width: 250px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        .description-panel.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .description-title {
+            color: #ff0000;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .description-text {
+            color: #cccccc;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .option-item.activating {
+            animation: activateFlash 0.6s ease-out;
+        }
+        
+        @keyframes activateFlash {
+            0% {
+                transform: scale(1);
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+            25% {
+                transform: scale(1.05);
+                background-color: rgba(255, 0, 0, 0.6);
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+                background-color: rgba(0, 0, 0, 0.3);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="notification-box" id="notificationBox">
-        <div class="wave-effect"></div>
+    <div class="menu">
+        <div class="header">
+            <span>Main Menu</span>
+            <span class="header-subtitle">By Faisal</span>
+        </div>
+        
+        <div class="main-content">
+            <nav class="sidebar">
+                <button class="tab active" data-tab="player">Player</button>
+                <button class="tab" data-tab="server">Server</button>
+                <button class="tab" data-tab="Online Vehicles">Online Vehicles</button>
+                <button class="tab" data-tab="weapon">Weapon</button>
+                <button class="tab" data-tab="combat">Combat</button>
+                <button class="tab" data-tab="vehicle">Vehicle</button>
+                <button class="tab" data-tab="visual">Visual</button>
+                <button class="tab" data-tab="misc">Misc</button>
+                <button class="tab" data-tab="search">Search</button>
+            </nav>
+            
+            <div class="content-area">
+                <div class="tab-content active" id="player">
+                    <div class="content-title">Player Options</div>
+                    <div class="option-item" data-description="Instantly teleport to your waypoint marker on the map">Teleport Waypoint</div>
+                    <div class="option-item" data-description="Fly through walls and objects freely without collision">Noclip</div>
+                    <div class="option-item" data-description="Become invincible and take no damage from any source">God Mode</div>
+                    <div class="option-item" data-description="Never run out of stamina - sprint and swim indefinitely">Infinite Stamina</div>
+                    <div class="option-item" data-description="Jump much higher than normal, reach tall buildings">Super Jump</div>
+                    <div class="option-item" data-description="Run at extremely high speeds across the map">Fast Run</div>
+                    <div class="option-item" data-description="Prevent your character from falling and ragdolling">No Ragdoll</div>
+                </div>
+                
+                <div class="tab-content" id="server">
+                    <div class="content-title">Online Players (Troll Options)</div>
+                    <div class="option-item" data-description="View the game from another player's perspective">Spectate Player</div>
+                    <div class="option-item" data-description="Instantly teleport to another player's location">Teleport to Player</div>
+                    <div class="option-item" data-description="Make the player fall from the sky">Fall Player</div>
+                    <div class="option-item" data-description="Create explosions around nearby players">Explode Nearby</div>
+                    <div class="option-item" data-description="Spam visual effects on players to annoy them">Spam Effects</div>
+                    <div class="option-item" data-description="Continuously spawn vehicles on players">Spam Cars</div>
+                </div>
+                
+                <div class="tab-content" id="Online Vehicles">
+                    <div class="content-title">Online Vehicles (Troll Options)</div>
+                    <div class="option-item" data-description="Spectate any vehicle in the session">Spectate Vehicle</div>
+                    <div class="option-item" data-description="Teleport to any vehicle's location">Teleport to Vehicle</div>
+                    <div class="option-item" data-description="Give the vehicle a massive speed boost">Boost Vehicle</div>
+                    <div class="option-item" data-description="Destroy the vehicle's engine completely">Break Engine</div>
+                    <div class="option-item" data-description="Pop all tires on the vehicle">Break All Wheels</div>
+                    <div class="option-item" data-description="Eject the driver from their vehicle">Kick From Vehicle</div>
+                    <div class="option-item" data-description="Launch the vehicle high into the air">Launch Vehicle</div>
+                </div>
+                
+                <div class="tab-content" id="combat">
+                    <div class="content-title">Combat Options</div>
+                    <div class="option-item" data-description="Automatically aim at enemies and lock onto targets">Aimbot</div>
+                    <div class="option-item" data-description="Automatically restore health when damaged">Auto Heal</div>
+                    <div class="option-item" data-description="Deal significantly more damage with all weapons">Damage Multiplier</div>
+                </div>
+                
+                <div class="tab-content" id="weapon">
+                    <div class="content-title">Weapon Options</div>
+                    <div class="option-item" data-description="Instantly receive every weapon in the game">Give All Weapons</div>
+                    <div class="option-item" data-description="Never run out of ammunition for any weapon">Infinite Ammo</div>
+                    <div class="option-item" data-description="Skip reload animations and shoot continuously">No Reload</div>
+                    <div class="option-item" data-description="Shoot weapons at extremely high fire rates">Rapid Fire</div>
+                    <div class="option-item" data-description="Every bullet causes an explosion on impact">Explosive Bullets</div>
+                </div>
 
-        <div class="user-header">
-            <div class="avatar-wrapper">
-                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User Avatar" class="avatar" id="userAvatar">
-            </div>
-            <div class="user-info">
-                <h3 class="display-name" id="displayName">Loading...</h3>
-                <p class="username" id="username">@loading</p>
+                <div class="tab-content" id="vehicle">
+                    <div class="content-title">Vehicle Options</div>
+                    <div class="option-item" data-description="Spawn any vehicle you want instantly">Spawn Vehicle</div>
+                    <div class="option-item" data-description="Maximize engine, brakes, and handling performance">Max Performance</div>
+                    <div class="option-item" data-description="Instantly fix all vehicle damage and restore health">Repair Vehicle</div>
+                    <div class="option-item" data-description="Increase your vehicle's top speed dramatically">Boost Speed</div>
+                    <div class="option-item" data-description="Cycle through rainbow colors on your vehicle paint">Rainbow Paint</div>
+                </div>
+                
+                <div class="tab-content" id="visual">
+                    <div class="content-title">Visual Options</div>
+                    <div class="option-item" data-description="See clearly in complete darkness with green tint">Night Vision</div>
+                    <div class="option-item" data-description="See heat signatures through walls and objects">Thermal Vision</div>
+                    <div class="option-item" data-description="Adjust your field of view for wider perspective">Custom FOV</div>
+                    <div class="option-item" data-description="Hide all HUD elements for clean screenshots">No HUD</div>
+                </div>
+                
+                <div class="tab-content" id="misc">
+                    <div class="content-title">Misc Options</div>
+                    <div class="option-item" data-description="Bypass FiveGuard and EasyAntiCheat protection">FG/EC Bypass</div>
+                </div>
+                
+                
+                <div class="tab-content" id="search">
+                    <div class="content-title">Search</div>
+                    <input type="text" id="searchInput" class="search-input option-item" placeholder="Type to search features..." data-description="Search for any feature across all categories">
+                    <div id="searchResults"></div>
+                </div>
             </div>
         </div>
-
-        <div class="glow-line"></div>
-        <p class="welcome-text">Welcome to Aura!</p>
+        
+        <div class="footer">
+            <span>discord.gg/zx7 | Beta 1</span>
+            <span class="counter" id="counter">1/10</span>
+        </div>
+    </div>
+    
+    <div class="description-panel" id="descriptionPanel">
+        <div class="description-title" id="descriptionTitle">Feature Name</div>
+        <div class="description-text" id="descriptionText">Description will appear here...</div>
     </div>
 
-    <script>
-        window.addEventListener('message', function(event) {
-            const data = event.data;
+<script>
+    let currentTab = 0;
+    let currentOption = 0;
+    let inOptionMode = false;
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const sidebar = document.querySelector('.sidebar');
 
-            if (data.type === "show_welcome") {
-                document.getElementById('displayName').textContent = data.displayName || "User";
-                document.getElementById('username').textContent = "@" + (data.username || "unknown");
+    let menuState = 'main';
+    let originalServerContent = '';
+    let originalPlayerListContent = '';
+    let currentPlayer = '';
+    let allFeatures = [];
+    
+    const toggleableOptions = [
+        'Noclip',
+        'God Mode',
+        'Infinite Stamina',
+        'Super Jump',
+        'Fast Run',
+        'No Ragdoll',
+        'Spectate Player',
+        'Spam Effects',
+        'Spam Cars',
+        'Spectate Vehicle',
+        'Infinite Ammo',
+        'No Reload',
+        'Rapid Fire',
+        'Explosive Bullets',
+        'Aimbot',
+        'Auto Heal',
+        'Damage Multiplier',
+        'Night Vision',
+        'Thermal Vision',
+        'ESP',
+        'No HUD',
+        'FG/EC Bypass'
+    ];
+    
+    const optionStates = {};
+    
+    function buildFeaturesDatabase() {
+        allFeatures = [];
+        const tabs = ['player', 'server', 'Online Vehicles', 'weapon', 'combat', 'vehicle', 'visual', 'misc'];
+        
+        tabs.forEach(tabId => {
+            const tabElement = document.getElementById(tabId);
+            if (tabElement) {
+                const categoryName = tabElement.querySelector('.content-title').textContent;
+                const options = tabElement.querySelectorAll('.option-item');
+                options.forEach(opt => {
+                    const optionText = opt.textContent.trim();
+                    const description = opt.getAttribute('data-description') || 'No description available';
+                    allFeatures.push({
+                        name: optionText,
+                        category: categoryName,
+                        tabId: tabId,
+                        description: description
+                    });
+                });
+            }
+        });
+    }
+    
+    function showDescription(optionElement) {
+        const descriptionPanel = document.getElementById('descriptionPanel');
+        const descriptionTitle = document.getElementById('descriptionTitle');
+        const descriptionText = document.getElementById('descriptionText');
+        
+        const title = optionElement.textContent.trim();
+        const description = optionElement.getAttribute('data-description') || 'No description available';
+        
+        descriptionTitle.textContent = title;
+        descriptionText.textContent = description;
+        
+        descriptionPanel.classList.add('show');
+    }
+    
+    function hideDescription() {
+        const descriptionPanel = document.getElementById('descriptionPanel');
+        descriptionPanel.classList.remove('show');
+    }
+    
+    function performSearch(query) {
+        const searchResults = document.getElementById('searchResults');
+        
+        if (!query || query.trim() === '') {
+            searchResults.innerHTML = '';
+            return;
+        }
+        
+        const lowerQuery = query.toLowerCase();
+        const results = allFeatures.filter(feature => 
+            feature.name.toLowerCase().includes(lowerQuery)
+        );
+        
+        if (results.length === 0) {
+            searchResults.innerHTML = '<div class="option-item" style="cursor: default; opacity: 0.6;">No results found</div>';
+            return;
+        }
+        
+        const groupedResults = {};
+        results.forEach(result => {
+            if (!groupedResults[result.category]) {
+                groupedResults[result.category] = [];
+            }
+            groupedResults[result.category].push(result);
+        });
+        
+        let html = '';
+        Object.keys(groupedResults).forEach(category => {
+            html += `<div class="search-category">${category}</div>`;
+            groupedResults[category].forEach(feature => {
+                html += `<div class="option-item" data-feature-name="${feature.name}" data-description="${feature.description}">${feature.name}</div>`;
+            });
+        });
+        
+        searchResults.innerHTML = html;
+    }
+
+    function switchTab(tabElement) {
+        const tabName = tabElement.getAttribute('data-tab');
+        
+        tabs.forEach(tab => tab.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        tabElement.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+        
+        currentTab = Array.from(tabs).indexOf(tabElement);
+        document.getElementById('counter').innerHTML = (currentTab + 1) + '/10';
+        
+        if (menuState !== 'main') {
+            resetToMain();
+        }
+        
+        console.log('Switched to: ' + tabName);
+    }
+
+    function resetToMain() {
+        menuState = 'main';
+        const serverContent = document.getElementById('server');
+        if (serverContent) {
+            serverContent.innerHTML = originalServerContent;
+        }
+    }
+
+    function getActiveOptions() {
+        const activeContent = document.querySelector('.tab-content.active');
+        if (!activeContent) return [];
+        
+        if (activeContent.id === 'search') {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = activeContent.querySelectorAll('#searchResults .option-item');
+            return [searchInput, ...searchResults];
+        }
+        
+        return activeContent.querySelectorAll('.option-item');
+    }
+
+    function updateOptionSelection() {
+        const options = getActiveOptions();
+        const searchInput = document.getElementById('searchInput');
+        
+        options.forEach((opt, idx) => {
+            if (idx === currentOption) {
+                opt.classList.add('selected');
+                opt.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
                 
-                const avatarImg = document.getElementById('userAvatar');
-                if (data.avatar) {
-                    avatarImg.onerror = function() { this.src = 'https://cdn.discordapp.com/embed/avatars/0.png'; };
-                    avatarImg.src = data.avatar;
+                if (opt !== searchInput || opt.hasAttribute('data-description')) {
+                    showDescription(opt);
                 }
-            }
-            else if (data.type === "hide_welcome") {
-                const notificationBox = document.getElementById('notificationBox');
-                notificationBox.classList.add('fade-out');
-                setTimeout(() => { document.body.innerHTML = ''; }, 500);
+            } else {
+                opt.classList.remove('selected');
             }
         });
+    }
 
-        // إرسال رسالة لـLua أن الصفحة جاهزة
-        window.addEventListener('load', function() {
-            if (window.postMessage) { window.postMessage({type: 'page_ready'}, '*'); }
+    function enterOptionMode() {
+        inOptionMode = true;
+        currentOption = 0;
+        
+        sidebar.classList.add('dimmed');
+        tabs[currentTab].classList.add('navigating');
+        tabs[currentTab].classList.remove('active');
+        
+        updateOptionSelection();
+        console.log('Entered option mode - now navigating options');
+    }
+
+    function exitOptionMode() {
+        inOptionMode = false;
+        
+        sidebar.classList.remove('dimmed');
+        tabs[currentTab].classList.remove('navigating');
+        tabs[currentTab].classList.add('active');
+        
+        const options = getActiveOptions();
+        options.forEach(opt => opt.classList.remove('selected'));
+        
+        hideDescription();
+        
+        console.log('Exited option mode - back to tab navigation');
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            exitOptionMode();
+            switchTab(this);
         });
-    </script>
+    });
+
+    function closeMenu() {
+        console.log('Close button clicked - Use M to toggle');
+        window.postMessage({ action: 'closeMenu' }, '*');
+    }
+
+    window.addEventListener('keydown', function(event) {
+        if (!inOptionMode) {
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                currentTab = (currentTab + 1) % tabs.length;
+                switchTab(tabs[currentTab]);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                currentTab = (currentTab - 1 + tabs.length) % tabs.length;
+                switchTab(tabs[currentTab]);
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                enterOptionMode();
+            }
+        } else {
+            const options = getActiveOptions();
+            
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                currentOption = (currentOption + 1) % options.length;
+                updateOptionSelection();
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                currentOption = (currentOption - 1 + options.length) % options.length;
+                updateOptionSelection();
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                
+                const selectedOption = options[currentOption];
+                const searchInput = document.getElementById('searchInput');
+                
+                const activeTabName = document.querySelector('.tab.active, .tab.navigating').getAttribute('data-tab');
+                
+                if (selectedOption === searchInput) {
+                    if (document.activeElement === searchInput) {
+                        searchInput.blur();
+                        console.log('Search input blurred - exiting typing mode');
+                    } else {
+                        searchInput.focus();
+                        console.log('Search input focused');
+                    }
+                    return;
+                }
+                
+                if (document.activeElement === searchInput && selectedOption !== searchInput) {
+                    searchInput.blur();
+                    console.log('Search input blurred - exiting typing mode');
+                    return;
+                }
+                
+                if (activeTabName === 'search' && searchInput && document.activeElement !== searchInput) {
+                    const searchResults = document.querySelectorAll('#searchResults .option-item');
+                    
+                    if (searchResults.length > 0 && selectedOption) {
+                        if (selectedOption.closest('#searchResults')) {
+                            const featureName = selectedOption.getAttribute('data-feature-name');
+                            console.log('Selected search result:', featureName);
+                            
+                            if (toggleableOptions.includes(featureName)) {
+                                optionStates[featureName] = !optionStates[featureName];
+                                const isEnabled = optionStates[featureName];
+                                showNotification(featureName, isEnabled);
+                                window.postMessage({
+                                    action: 'toggleOption',
+                                    option: featureName,
+                                    enabled: isEnabled
+                                }, '*');
+                            } else {
+                                showNotification(featureName, true);
+                                window.postMessage({
+                                    action: 'toggleOption',
+                                    option: featureName,
+                                    enabled: true
+                                }, '*');
+                            }
+                            return;
+                        }
+                    }
+                    
+                    searchInput.focus();
+                    return;
+                }
+                
+                if (!selectedOption) return;
+                
+                const optionText = selectedOption.textContent.trim();
+                console.log('Selected option:', optionText);
+                
+                if (toggleableOptions.includes(optionText)) {
+                    optionStates[optionText] = !optionStates[optionText];
+                    const isEnabled = optionStates[optionText];
+                    showNotification(optionText, isEnabled);
+                    window.postMessage({
+                        action: 'toggleOption',
+                        option: optionText,
+                        enabled: isEnabled
+                    }, '*');
+                } else {
+                    showNotification(optionText, true);
+                    window.postMessage({
+                        action: 'toggleOption',
+                        option: optionText,
+                        enabled: true
+                    }, '*');
+                }
+            } else if (event.key === 'Backspace') {
+                event.preventDefault();
+                exitOptionMode();
+            }
+        }
+    });
+
+    originalServerContent = document.getElementById('server').innerHTML;
+
+    function showNotification(optionName, isEnabled) {
+        const existingNotif = document.querySelector('.notification');
+        if (existingNotif) {
+            existingNotif.remove();
+        }
+        
+        const status = isEnabled ? 'Enabled' : 'Disabled';
+        const statusColor = isEnabled ? '#ff0000' : '#666666';
+        
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <div class="notification-title">Success</div>
+            <div class="notification-message">${optionName} Has Been <span style="color: ${statusColor}">${status}</span></div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+        
+        const options = getActiveOptions();
+        const selectedOption = options[currentOption];
+        if (selectedOption) {
+            selectedOption.classList.add('activating');
+            setTimeout(() => {
+                selectedOption.classList.remove('activating');
+            }, 600);
+        }
+    }
+
+    window.addEventListener('message', function(event) {
+        console.log('Message from Lua:', event.data);
+    });
+    
+    buildFeaturesDatabase();
+    
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function(e) {
+        performSearch(e.target.value);
+    });
+    
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('option-item')) {
+            const featureName = e.target.getAttribute('data-feature-name') || e.target.textContent.trim();
+            
+            e.target.classList.add('activating');
+            setTimeout(() => {
+                e.target.classList.remove('activating');
+            }, 600);
+            
+            if (toggleableOptions.includes(featureName)) {
+                optionStates[featureName] = !optionStates[featureName];
+                const isEnabled = optionStates[featureName];
+                showNotification(featureName, isEnabled);
+                window.postMessage({
+                    action: 'toggleOption',
+                    option: featureName,
+                    enabled: isEnabled
+                }, '*');
+            } else {
+                showNotification(featureName, true);
+                window.postMessage({
+                    action: 'toggleOption',
+                    option: featureName,
+                    enabled: true
+                }, '*');
+            }
+        }
+    });
+    
+    document.addEventListener('mouseover', function(e) {
+        if (e.target.classList.contains('option-item') && e.target.hasAttribute('data-description')) {
+            showDescription(e.target);
+        }
+    });
+    
+    document.addEventListener('mouseout', function(e) {
+        if (e.target.classList.contains('option-item')) {
+            if (!inOptionMode) {
+                hideDescription();
+            }
+        }
+    });
+
+    document.querySelector('.close-btn').addEventListener('click', closeMenu);
+</script>
 </body>
 </html>
